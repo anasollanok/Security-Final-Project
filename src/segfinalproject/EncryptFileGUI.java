@@ -5,6 +5,11 @@
  */
 package segfinalproject;
 
+import java.awt.event.MouseEvent;
+import javax.swing.Action;
+import javax.swing.KeyStroke;
+import javax.swing.text.DefaultEditorKit;
+
 /**
  *
  * @author anasollano
@@ -16,6 +21,16 @@ public class EncryptFileGUI extends javax.swing.JFrame {
      */
     public EncryptFileGUI() {
         initComponents();
+        initComponents();
+        Action copy = new DefaultEditorKit.CopyAction();
+        copy.putValue(Action.NAME, "Copy");
+        copy.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control C"));
+        jPopupMenu1.add(copy);
+
+        Action paste = new DefaultEditorKit.PasteAction();
+        paste.putValue(Action.NAME, "Paste");
+        paste.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control V"));
+        jPopupMenu1.add(paste);
     }
 
     /**
@@ -27,6 +42,7 @@ public class EncryptFileGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -52,7 +68,14 @@ public class EncryptFileGUI extends javax.swing.JFrame {
         jLabel2.setText("Add a (good*) password too:");
 
         jPasswordField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPasswordField1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseReleased(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton2.setText("show pass");
@@ -117,6 +140,24 @@ public class EncryptFileGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void showPopupMenu(MouseEvent e) {
+        jPopupMenu1.show(this, e.getX(), e.getY());
+    }
+    
+    private void jPasswordField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MousePressed
+       
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jPasswordField1MousePressed
+
+    private void jPasswordField1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseReleased
+
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jPasswordField1MouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -160,5 +201,6 @@ public class EncryptFileGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }

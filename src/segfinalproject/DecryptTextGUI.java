@@ -5,6 +5,7 @@
  */
 package segfinalproject;
 
+import java.awt.event.MouseEvent;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
@@ -57,12 +58,28 @@ public class DecryptTextGUI extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jTextArea1.setRows(5);
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextArea1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTextArea1MouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel2.setText("Write the password too:");
 
         jPasswordField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPasswordField1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseReleased(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton1.setText("show pass");
@@ -123,6 +140,38 @@ public class DecryptTextGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+ 
+    private void showPopupMenu(MouseEvent e) {
+        jPopupMenu1.show(this, e.getX(), e.getY());
+    }
+    
+    private void jTextArea1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseReleased
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jTextArea1MouseReleased
+
+    private void jTextArea1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MousePressed
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jTextArea1MousePressed
+
+    private void jPasswordField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MousePressed
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jPasswordField1MousePressed
+
+    private void jPasswordField1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseReleased
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jPasswordField1MouseReleased
 
     /**
      * @param args the command line arguments

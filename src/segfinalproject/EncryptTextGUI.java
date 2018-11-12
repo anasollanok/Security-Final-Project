@@ -79,6 +79,14 @@ public class EncryptTextGUI extends javax.swing.JFrame {
         jLabel2.setText("Add a (good*) password too:");
 
         jPasswordField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPasswordField1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseReleased(evt);
+            }
+        });
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -187,6 +195,20 @@ public class EncryptTextGUI extends javax.swing.JFrame {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jTextArea1MouseReleased
+
+    private void jPasswordField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MousePressed
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jPasswordField1MousePressed
+
+    private void jPasswordField1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseReleased
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            showPopupMenu(evt);
+        }
+    }//GEN-LAST:event_jPasswordField1MouseReleased
 
     /**
      * @param args the command line arguments
