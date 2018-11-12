@@ -83,6 +83,14 @@ public class DecryptTextGUI extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton1.setText("show pass");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -172,6 +180,15 @@ public class DecryptTextGUI extends javax.swing.JFrame {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jPasswordField1MouseReleased
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        jPasswordField1.setEchoChar((char)0);
+    }//GEN-LAST:event_jButton1MousePressed
+
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        
+        jPasswordField1.setEchoChar('*');
+    }//GEN-LAST:event_jButton1MouseReleased
 
     /**
      * @param args the command line arguments

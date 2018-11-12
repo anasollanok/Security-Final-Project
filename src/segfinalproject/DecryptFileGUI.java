@@ -21,7 +21,6 @@ public class DecryptFileGUI extends javax.swing.JFrame {
      */
     public DecryptFileGUI() {
         initComponents();
-        initComponents();
         Action copy = new DefaultEditorKit.CopyAction();
         copy.putValue(Action.NAME, "Copy");
         copy.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control C"));
@@ -57,11 +56,17 @@ public class DecryptFileGUI extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton1.setText("Select");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jLabel2.setText("Write the password too:");
 
         jPasswordField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jPasswordField1.setText("nothingyet");
         jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPasswordField1MousePressed(evt);
@@ -73,6 +78,14 @@ public class DecryptFileGUI extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton2.setText("show pass");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton2MouseReleased(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -131,7 +144,7 @@ public class DecryptFileGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void showPopupMenu(MouseEvent e) {
@@ -139,18 +152,32 @@ public class DecryptFileGUI extends javax.swing.JFrame {
     }
     
     private void jPasswordField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MousePressed
-        // TODO add your handling code here:
+
         if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jPasswordField1MousePressed
 
     private void jPasswordField1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseReleased
-        // TODO add your handling code here:
+
         if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }   
     }//GEN-LAST:event_jPasswordField1MouseReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new ChooseFileGUI().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+
+        jPasswordField1.setEchoChar((char)0);
+    }//GEN-LAST:event_jButton2MousePressed
+
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+
+        jPasswordField1.setEchoChar('*');
+    }//GEN-LAST:event_jButton2MouseReleased
 
     /**
      * @param args the command line arguments

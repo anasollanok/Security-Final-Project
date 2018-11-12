@@ -21,7 +21,6 @@ public class EncryptFileGUI extends javax.swing.JFrame {
      */
     public EncryptFileGUI() {
         initComponents();
-        initComponents();
         Action copy = new DefaultEditorKit.CopyAction();
         copy.putValue(Action.NAME, "Copy");
         copy.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control C"));
@@ -79,6 +78,14 @@ public class EncryptFileGUI extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton2.setText("show pass");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton2MouseReleased(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial Narrow", 0, 10)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 51));
@@ -137,7 +144,7 @@ public class EncryptFileGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        new ChooseFileGUI().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void showPopupMenu(MouseEvent e) {
@@ -157,6 +164,15 @@ public class EncryptFileGUI extends javax.swing.JFrame {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jPasswordField1MouseReleased
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+       jPasswordField1.setEchoChar((char)0);
+    }//GEN-LAST:event_jButton2MousePressed
+
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+        
+        jPasswordField1.setEchoChar('*');
+    }//GEN-LAST:event_jButton2MouseReleased
 
     /**
      * @param args the command line arguments
