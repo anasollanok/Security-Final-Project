@@ -5,6 +5,10 @@
  */
 package segfinalproject;
 
+import javax.swing.Action;
+import javax.swing.KeyStroke;
+import javax.swing.text.DefaultEditorKit;
+
 /**
  *
  * @author anasollano
@@ -16,6 +20,15 @@ public class DecryptTextGUI extends javax.swing.JFrame {
      */
     public DecryptTextGUI() {
         initComponents();
+        Action copy = new DefaultEditorKit.CopyAction();
+        copy.putValue(Action.NAME, "Copy");
+        copy.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control C"));
+        jPopupMenu1.add(copy);
+
+        Action paste = new DefaultEditorKit.PasteAction();
+        paste.putValue(Action.NAME, "Paste");
+        paste.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control V"));
+        jPopupMenu1.add(paste);
     }
 
     /**
@@ -27,6 +40,7 @@ public class DecryptTextGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -151,6 +165,7 @@ public class DecryptTextGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
