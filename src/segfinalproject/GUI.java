@@ -58,6 +58,11 @@ public class GUI extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton3.setText("Decrypt Text");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton4.setText("Decrypt File");
@@ -103,8 +108,15 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+        new EncryptFileGUI().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new DecryptTextGUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
