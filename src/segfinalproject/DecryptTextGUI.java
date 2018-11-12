@@ -49,7 +49,6 @@ public class DecryptTextGUI extends javax.swing.JFrame {
         jLabel2.setText("Write the password too:");
 
         jPasswordField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        jPasswordField1.setText("jPasswordField1");
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton1.setText("show pass");
@@ -80,7 +79,7 @@ public class DecryptTextGUI extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(1, 1, 1)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton2)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
