@@ -57,7 +57,7 @@ public class Main {
     
     public static boolean encryptFile(String inPath, char[] password, boolean delete, String newPath){
         // Create salt
-        salt = createSalt();
+        salt =  "a.j5&&d12277.002154".getBytes();
         // Create key
         SecretKeySpec key = createKey(password);
         Cipher cipher;
@@ -124,8 +124,40 @@ public class Main {
         }
     }
     
-    public static void decryptFile(){
+    public static boolean decryptFile(String pathFile, char[] password, String newPath){
+        salt =  "a.j5&&d12277.002154".getBytes();
+        SecretKey secret = createKey(password);
+        Cipher cipher;
+        try{
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, secret);
+        }
+        catch(InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException e){
+            System.err.println(e.toString());
+            return false;
+        }
+        File inFile = new File(pathFile);
+        FileOutputStream fos;
         
+        try (FileInputStream fis = new FileInputStream(inFile)) {
+            byte[] inputBytes = new byte[(int) inFile.length()];
+            fis.read(inputBytes);
+            // Decrypting
+            byte[] outputBytes = cipher.doFinal(inputBytes);
+            // Prepping for writing
+            String[] splitName = inFile.getName().split("\\.(?=[^\\.]+$)");
+            splitName[0] = splitName[0].substring(0, splitName[0].length() - 4);
+            String path = newPath + "\\" + splitName[0] + "." + splitName[1];
+            // Writing
+            fos = new FileOutputStream(path);
+            fos.write(outputBytes);
+            fos.close();
+            return true;
+        }
+        catch(Exception e){
+            System.err.println(e.toString());
+            return false;
+        }
     }
     
     public static boolean checkPass(char[] password){

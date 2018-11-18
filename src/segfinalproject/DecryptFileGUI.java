@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 
@@ -99,6 +100,11 @@ public class DecryptFileGUI extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton3.setText("Decrypt");
         jButton3.setToolTipText("See fun stuff that was hidden from you");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -222,6 +228,31 @@ public class DecryptFileGUI extends javax.swing.JFrame {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jTextField1MouseReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        char[] password = jPasswordField1.getPassword();
+        String path = jTextField1.getText();
+        if(Main.checkPass(password)){
+            final JFileChooser fc = new JFileChooser();
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fc.setDialogTitle("Select a directory, please.");
+            fc.showOpenDialog(DecryptFileGUI.this);
+            File file = fc.getSelectedFile();
+            String futurePath = file.getAbsolutePath();
+            if (Main.decryptFile(path, password, futurePath)){
+                JOptionPane.showMessageDialog(null, "It's been a huge success!",
+                        "All done", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Sorry, pal. There's been "
+                        + "an error.","Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Sorry, pal. You had a better "
+                    + "password, remember?","Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
