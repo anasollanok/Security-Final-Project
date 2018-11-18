@@ -178,13 +178,17 @@ public class EncryptTextGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Main enc = new Main(jPasswordField1.getPassword());
-        if(enc.checkPass()){
-            String text = enc.encryptText(jTextArea1.getText());
+        char[] password = jPasswordField1.getPassword();
+        if(Main.checkPass(password)){
+            String text = Main.encryptText(jTextArea1.getText(), password);
             if (text != null)
                 jTextArea1.setText(text);
             else
                 JOptionPane.showMessageDialog(null, "Sorry, there has been an error.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Sorry, your password is not hard enough.", 
                         "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed

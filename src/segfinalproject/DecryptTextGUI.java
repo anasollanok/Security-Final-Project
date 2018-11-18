@@ -7,6 +7,7 @@ package segfinalproject;
 
 import java.awt.event.MouseEvent;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 
@@ -100,6 +101,11 @@ public class DecryptTextGUI extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton2.setText("Decrypt");
         jButton2.setToolTipText("what will the message say?");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,28 +160,24 @@ public class DecryptTextGUI extends javax.swing.JFrame {
     }
     
     private void jTextArea1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseReleased
-        // TODO add your handling code here:
         if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jTextArea1MouseReleased
 
     private void jTextArea1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MousePressed
-        // TODO add your handling code here:
         if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jTextArea1MousePressed
 
     private void jPasswordField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MousePressed
-        // TODO add your handling code here:
-        if (evt.isPopupTrigger()) {
+       if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jPasswordField1MousePressed
 
     private void jPasswordField1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseReleased
-        // TODO add your handling code here:
         if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }
@@ -186,9 +188,24 @@ public class DecryptTextGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MousePressed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
-        
         jPasswordField1.setEchoChar('*');
     }//GEN-LAST:event_jButton1MouseReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        char[] password = jPasswordField1.getPassword();
+        if(Main.checkPass(password)){
+            String text = Main.decryptText(jTextArea1.getText(), password);
+            if (text != null)
+                jTextArea1.setText(text);
+            else
+                JOptionPane.showMessageDialog(null, "Sorry, there has been an error.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Sorry, wrong password. You put a "
+                    + "stronger one last time.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
