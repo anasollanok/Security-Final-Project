@@ -5,9 +5,9 @@
  */
 package segfinalproject;
 
-import static java.awt.SystemColor.menu;
 import java.awt.event.MouseEvent;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 
@@ -178,7 +178,15 @@ public class EncryptTextGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Main enc = new Main(jPasswordField1.getPassword());
+        if(enc.checkPass()){
+            String text = enc.encryptText(jTextArea1.getText());
+            if (text != null)
+                jTextArea1.setText(text);
+            else
+                JOptionPane.showMessageDialog(null, "Sorry, there has been an error.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -188,6 +196,7 @@ public class EncryptTextGUI extends javax.swing.JFrame {
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextArea1KeyPressed
+    
     private void showPopupMenu(MouseEvent e) {
         jPopupMenu1.show(this, e.getX(), e.getY());
     }
@@ -205,14 +214,12 @@ public class EncryptTextGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextArea1MouseReleased
 
     private void jPasswordField1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MousePressed
-        
         if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jPasswordField1MousePressed
 
     private void jPasswordField1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseReleased
-        
         if (evt.isPopupTrigger()) {
             showPopupMenu(evt);
         }
