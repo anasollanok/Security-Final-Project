@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
 
@@ -98,6 +99,11 @@ public class EncryptFileGUI extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jButton3.setText("Encrypt");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,12 +174,15 @@ public class EncryptFileGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jLabel5))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel5)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(26, 26, 26)
@@ -238,6 +247,51 @@ public class EncryptFileGUI extends javax.swing.JFrame {
             showPopupMenu(evt);
         }
     }//GEN-LAST:event_jTextField1MouseReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        char[] password = jPasswordField1.getPassword();
+        String path = jTextField1.getText();
+        if(Main.checkPass(password)){
+            int reply = JOptionPane.showConfirmDialog(null, 
+                    "Do you want to delete the file after encryption?", "Warning",
+                    JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                if (Main.encryptFile(path, password, true, path)){
+                    if (Main.deleteFile(path)){
+                        JOptionPane.showMessageDialog(null, "It's been a huge success!",
+                                "All done", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Sorry, we couldn't delete it.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Sorry, there has been an error.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else if (reply == JOptionPane.NO_OPTION){
+                final JFileChooser fc = new JFileChooser();
+                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fc.setDialogTitle("Select a directory, please.");
+                fc.showSaveDialog(EncryptFileGUI.this);
+                String newPath = fc.getSelectedFile().getAbsolutePath();
+                if (Main.encryptFile(path, password, false, newPath)){
+                    JOptionPane.showMessageDialog(null, "It's been a huge success!",
+                            "All done", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Sorry, there has been an error.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Sorry, your password is not hard enough.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

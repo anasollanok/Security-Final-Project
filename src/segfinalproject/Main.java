@@ -5,12 +5,17 @@
  */
 package segfinalproject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -52,8 +57,49 @@ public class Main {
         }
     }
     
-    public static void encryptFile(){
+    public static boolean encryptFile(String inPath, char[] password, boolean delete, String newPath){
+        // Create salt
+        salt = createSalt();
+        // Create key
+        SecretKeySpec key = createKey(password);
+        Cipher cipher;
+        // Instances of encryption
+        try {
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+        }
+        catch(InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException e){
+            System.err.println(e.toString());
+            return false;
+        }
+        File inFile = new File(inPath);
+        FileOutputStream fos;
         
+        try (FileInputStream fis = new FileInputStream(inFile)) {
+            // Reading file
+            byte[] inputBytes = new byte[(int) inFile.length()];
+            fis.read(inputBytes);
+            // Encrypting file
+            byte[] outputBytes = cipher.doFinal(inputBytes);
+            // Prepping writing with new name
+            String outPath = "";
+            String[] tokens = inPath.split("\\.(?=[^\\.]+$)");
+            // If user chooses to delete:
+            if (delete) {
+                outPath = tokens[0] + ".cfr." + tokens[1];
+            } else {
+                String[] splitName = inFile.getName().split("\\.(?=[^\\.]+$)");
+                outPath = newPath + "\\" + splitName[0] + ".cfr." + splitName[1];
+            }
+            fos = new FileOutputStream(outPath);
+            fos.write(outputBytes);
+            fos.close();
+            return true;
+        }
+        catch (Exception e){
+            System.err.println(e.toString());
+            return false;
+        }
     }
     
     public static String decryptText(String text, char[] password){
@@ -76,7 +122,6 @@ public class Main {
         catch(InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | 
                 IllegalBlockSizeException | NoSuchPaddingException e){ 
             System.err.println(e.toString());
-            error = true;
             return "null";
         }
     }
@@ -131,5 +176,16 @@ public class Main {
         System.arraycopy(salt, 0, buffer, 0, salt.length);
         System.arraycopy(encryptedTextBytes, 0, buffer, salt.length, encryptedTextBytes.length);
         return buffer;
+    }
+    
+    public static boolean deleteFile(String path){
+        File file = new File(path);
+        try {
+            return Files.deleteIfExists(file.toPath());
+        }
+        catch(IOException e){
+            System.err.println(e.toString());
+        }
+        return false;
     }
 }
