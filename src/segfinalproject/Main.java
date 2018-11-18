@@ -31,7 +31,7 @@ public class Main {
     public static boolean error = false;
     
     public static String encryptText(String text, char[] password) {
-        Security.setProperty("crypto.policy", "unlimited");
+        // Security.setProperty("crypto.policy", "unlimited");
         // Create salt
         salt = createSalt();
         // Create key
