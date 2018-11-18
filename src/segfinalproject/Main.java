@@ -11,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
-import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -52,7 +51,6 @@ public class Main {
                 NoSuchAlgorithmException | BadPaddingException | 
                 IllegalBlockSizeException | NoSuchPaddingException e){
             System.err.println(e.toString());
-            error = true;
             return null;
         }
     }

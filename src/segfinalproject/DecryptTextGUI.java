@@ -193,17 +193,31 @@ public class DecryptTextGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         char[] password = jPasswordField1.getPassword();
+        // Test if it is Base64
+        try {
+            byte[] cipherText = Base64.decode(jTextArea1.getText(), Base64.NO_WRAP);
+            if (cipherText.length % 16 != 0) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Your base is off, I believe.", 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if(Main.checkPass(password)){
             String text = Main.decryptText(jTextArea1.getText(), password);
             if (text != null)
                 jTextArea1.setText(text);
-            else
+            else {
                 JOptionPane.showMessageDialog(null, "Sorry, there has been an error.", 
                         "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
         else {
             JOptionPane.showMessageDialog(null, "Sorry, wrong password. You put a "
                     + "stronger one last time.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
